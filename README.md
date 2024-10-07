@@ -17,3 +17,15 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+
+# Note:
+1- Go to psql/ and run the following command:
+```sudo docker-compose up -d```
+2- Go to the root of the project and run the following command:
+```mix setup```
+3- Go to the root of the project and run the following command:
+```mix ecto.migrate```
+4- Run the following command to start the server:
+```mix phx.server```
+5- Enjoy the app!
