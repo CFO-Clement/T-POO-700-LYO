@@ -20,10 +20,15 @@ defmodule TimeManagerWeb.Router do
     get "/", PageController, :home
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", TimeManagerWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", TimeManagerWeb do
+    pipe_through :api
+
+    get "/task", TaskController, :task
+    get "/user", UserController, :user
+
+    resources "/users", UserController, except: [:new, :edit]
+    resources "/tasks", TaskController, except: [:new, :edit]
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:time_manager, :dev_routes) do

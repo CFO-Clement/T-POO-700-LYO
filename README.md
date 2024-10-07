@@ -28,7 +28,9 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 ```mix ecto.migrate```
 4- Run the following command to start the server:
 ```mix phx.server```
-5- Enjoy the app!
+5- Add the routes:
+```mix phx.routes```
+6- Enjoy the app!
 
 ## Dbeaver
 You can use dbeaver to connect to database with the following information:
