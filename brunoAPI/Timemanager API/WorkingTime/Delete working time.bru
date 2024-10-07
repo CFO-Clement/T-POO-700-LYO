@@ -1,0 +1,37 @@
+meta {
+  name: Delete Working Time
+  type: http
+  seq: 2
+}
+
+delete {
+  url: {{baseUrl}}/api/working_times/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: {{workingTimeId}}
+}
+
+vars:pre-request {
+  workingTimeId: 1
+}
+
+assert {
+  res.status: eq 204
+}
+
+docs {
+  Cette requête supprime une entrée de temps de travail spécifique.
+  
+  Paramètres de l'URL :
+  - id : L'ID de l'entrée de temps de travail à supprimer
+  
+  Réponse attendue :
+  - Aucun contenu
+  
+  Codes de statut :
+  - 204 : Suppression réussie
+  - 404 : Entrée de temps de travail non trouvée
+}

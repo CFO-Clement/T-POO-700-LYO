@@ -1,0 +1,45 @@
+meta {
+  name: Get clock
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/api/clocks/:clockId
+  body: none
+  auth: none
+}
+
+params:path {
+  clockId: {{clockId}}
+}
+
+headers {
+  Content-Type: application/json
+}
+
+vars:pre-request {
+  clockId: 4
+}
+
+assert {
+  res.status: eq 200
+  res.body.data.id: eq {{clockId}}
+  res.body.data.time: isString
+  res.body.data.status: isBoolean
+  res.body.data.time: matches /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/
+}
+
+docs {
+  Cette requête récupère les détails d'une entrée d'horloge spécifique.
+  
+  Paramètres de l'URL :
+  - clockId : L'ID de l'entrée d'horloge à récupérer
+  
+  Réponse attendue :
+  - Un objet JSON contenant les détails de l'entrée d'horloge
+  
+  Codes de statut :
+  - 200 : Requête réussie
+  - 404 : Entrée d'horloge non trouvée
+}

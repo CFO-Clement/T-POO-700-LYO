@@ -1,0 +1,58 @@
+meta {
+  name: Update User
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{baseUrl}}/api/users/:userId
+  body: json
+  auth: none
+}
+
+params:path {
+  userId: {{userId}}
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "user": {
+      "username": "updateduser",
+      "email": "updateduser@example.com"
+    }
+  }
+}
+
+vars:pre-request {
+  userId: 4
+}
+
+assert {
+  res.status: eq 200
+  res.body.data.id: eq {{userId}}
+  res.body.data.username: eq "updateduser"
+  res.body.data.email: eq "updateduser@example.com"
+}
+
+docs {
+  Cette requête met à jour un utilisateur existant.
+  
+  Paramètres de l'URL :
+  - userId : L'ID de l'utilisateur à mettre à jour
+  
+  Paramètres du corps :
+  - username : Le nouveau nom d'utilisateur
+  - email : La nouvelle adresse email de l'utilisateur
+  
+  Réponse attendue :
+  - Un objet JSON contenant les détails mis à jour de l'utilisateur
+  
+  Codes de statut :
+  - 200 : Mise à jour réussie
+  - 404 : Utilisateur non trouvé
+  - 422 : Erreur de validation des données
+}

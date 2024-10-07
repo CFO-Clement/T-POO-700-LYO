@@ -61,6 +61,18 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+# Swagger configuration
+config :timemanager, :phoenix_swagger,
+  swagger_files: %{
+    "priv/static/swagger.json" => [
+      router: TimemanagerWeb.Router,
+      endpoint: TimemanagerWeb.Endpoint
+    ]
+  }
+
+# Configure phoenix_swagger to use Poison
+config :phoenix_swagger, json_library: Poison
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

@@ -1,0 +1,31 @@
+meta {
+  name: List Working Times
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/api/working_times
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body.data: isArray
+  res.body.data[0].id: isNumber
+  res.body.data[0].start: isString
+  res.body.data[0].end: isString
+  res.body.data[0].start: matches /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+  res.body.data[0].end: matches /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+}
+
+docs {
+  Cette requête récupère la liste de toutes les entrées de temps de travail.
+  
+  Réponse attendue :
+  - Un tableau d'objets JSON contenant les détails de toutes les entrées de temps de travail
+  
+  Codes de statut :
+  - 200 : Requête réussie
+}

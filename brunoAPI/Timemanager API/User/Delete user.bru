@@ -1,0 +1,37 @@
+meta {
+  name: Delete User
+  type: http
+  seq: 2
+}
+
+delete {
+  url: {{baseUrl}}/api/users/:userId
+  body: none
+  auth: none
+}
+
+params:path {
+  userId: {{userId}}
+}
+
+vars:pre-request {
+  userId: 3
+}
+
+assert {
+  res.status: eq 204
+}
+
+docs {
+  Cette requête supprime un utilisateur spécifique.
+  
+  Paramètres de l'URL :
+  - userId : L'ID de l'utilisateur à supprimer
+  
+  Réponse attendue :
+  - Aucun contenu
+  
+  Codes de statut :
+  - 204 : Suppression réussie
+  - 404 : Utilisateur non trouvé
+}

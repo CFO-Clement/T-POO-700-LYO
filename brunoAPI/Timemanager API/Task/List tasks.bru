@@ -1,0 +1,30 @@
+meta {
+  name: List Tasks
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/api/tasks
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body.data: isArray
+  res.body.data[0].id: isNumber
+  res.body.data[0].title: isString
+  res.body.data[0].description: isString
+  res.body.data[0].due_date: isString
+}
+
+docs {
+  Cette requête récupère la liste de toutes les tâches.
+  
+  Réponse attendue :
+  - Un tableau d'objets JSON contenant les détails de toutes les tâches
+  
+  Codes de statut :
+  - 200 : Requête réussie
+}

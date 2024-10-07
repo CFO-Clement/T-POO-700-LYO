@@ -1,0 +1,41 @@
+meta {
+  name: Delete clock
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/api/clocks/:clockId
+  body: none
+  auth: none
+}
+
+params:path {
+  clockId: {{clockId}}
+}
+
+headers {
+  Content-Type: application/json
+}
+
+vars:pre-request {
+  clockId: 1
+}
+
+assert {
+  res.status: eq 204
+}
+
+docs {
+  Cette requête supprime une entrée d'horloge spécifique.
+  
+  Paramètres de l'URL :
+  - clockId : L'ID de l'entrée d'horloge à supprimer
+  
+  Réponse attendue :
+  - Aucun contenu
+  
+  Codes de statut :
+  - 204 : Suppression réussie
+  - 404 : Entrée d'horloge non trouvée
+}

@@ -1,0 +1,65 @@
+meta {
+  name: Update Task
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{baseUrl}}/api/tasks/:taskId
+  body: json
+  auth: none
+}
+
+params:path {
+  taskId: {{taskId}}
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "task": {
+      "title": "Updated Task",
+      "description": "This task has been updated",
+      "due_date": "{{updatedDueDateTimestamp}}",
+      "user_id": {{userId}}
+    }
+  }
+}
+
+vars:pre-request {
+  taskId: 1
+  updatedDueDateTimestamp: 2026-01-31T23:59:59
+  userId: 1
+}
+
+assert {
+  res.status: eq 200
+  res.body.data.id: eq {{taskId}}
+  res.body.data.title: eq "Updated Task"
+  res.body.data.description: eq "This task has been updated"
+  res.body.data.due_date: eq "{{updatedDueDateTimestamp}}"
+}
+
+docs {
+  Cette requête met à jour une tâche existante.
+  
+  Paramètres de l'URL :
+  - taskId : L'ID de la tâche à mettre à jour
+  
+  Paramètres du corps :
+  - title : Le nouveau titre de la tâche
+  - description : La nouvelle description de la tâche
+  - due_date : La nouvelle date d'échéance de la tâche (format ISO 8601)
+  - user_id : L'ID de l'utilisateur associé à cette tâche
+  
+  Réponse attendue :
+  - Un objet JSON contenant les détails mis à jour de la tâche
+  
+  Codes de statut :
+  - 200 : Mise à jour réussie
+  - 404 : Tâche non trouvée
+  - 422 : Erreur de validation des données
+}

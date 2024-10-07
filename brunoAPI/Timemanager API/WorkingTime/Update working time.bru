@@ -1,0 +1,65 @@
+meta {
+  name: Update Working Time
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{baseUrl}}/api/working_times/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: {{workingTimeId}}
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "working_time": {
+      "start": "{{updatedStartTime}}",
+      "end": "{{updatedEndTime}}",
+      "user_id": {{userId}}
+    }
+  }
+}
+
+vars:pre-request {
+  workingTimeId: 2
+  updatedStartTime: 2024-10-07T10:00:00
+  updatedEndTime: 2024-10-07T18:00:00
+  userId: 1
+}
+
+assert {
+  res.status: eq 200
+  res.body.data.id: eq {{workingTimeId}}
+  res.body.data.start: eq "{{updatedStartTime}}"
+  res.body.data.end: eq "{{updatedEndTime}}"
+  res.body.data.start: matches /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+  res.body.data.end: matches /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+}
+
+docs {
+  Cette requête met à jour une entrée de temps de travail existante.
+  
+  Paramètres de l'URL :
+  - id : L'ID de l'entrée de temps de travail à mettre à jour
+  
+  Paramètres du corps :
+  - start : La nouvelle heure de début du travail (format ISO 8601)
+  - end : La nouvelle heure de fin du travail (format ISO 8601)
+  - user_id : L'ID de l'utilisateur associé à cette entrée de temps de travail
+  
+  Réponse attendue :
+  - Un objet JSON contenant les détails mis à jour de l'entrée de temps de travail
+  
+  Codes de statut :
+  - 200 : Mise à jour réussie
+  - 404 : Entrée de temps de travail non trouvée
+  - 422 : Erreur de validation des données
+}

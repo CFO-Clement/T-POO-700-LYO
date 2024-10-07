@@ -1,0 +1,56 @@
+meta {
+  name: Create Task
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/tasks
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "task": {
+      "title": "New Task",
+      "description": "This is a new task",
+      "due_date": "{{dueDateTimestamp}}",
+      "user_id": {{userId}}
+    }
+  }
+}
+
+vars:pre-request {
+  dueDateTimestamp: 2024-12-31T23:59:59+0000
+  userId: 1
+}
+
+assert {
+  res.status: eq 201
+  res.body.data.id: isNumber
+  res.body.data.title: eq "New Task"
+  res.body.data.description: eq "This is a new task"
+  res.body.data.due_date: isString
+}
+
+docs {
+  Cette requête crée une nouvelle tâche.
+  
+  Paramètres du corps :
+  - title : Le titre de la tâche
+  - description : La description de la tâche
+  - due_date : La date d'échéance de la tâche (format ISO 8601)
+  - user_id : L'ID de l'utilisateur associé à cette tâche
+  
+  Réponse attendue :
+  - Un objet JSON contenant les détails de la tâche créée
+  
+  Codes de statut :
+  - 201 : Création réussie
+  - 422 : Erreur de validation des données
+}

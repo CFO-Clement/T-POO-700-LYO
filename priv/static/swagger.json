@@ -1,0 +1,751 @@
+{
+  "swagger": "2.0",
+  "paths": {
+    "/api/working_times/{id}": {
+      "put": {
+        "tags": [
+          "WorkingTime"
+        ],
+        "summary": "Update working time",
+        "responses": {
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/WorkingTime"
+            },
+            "description": "Success"
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "Working Time ID"
+          },
+          {
+            "schema": {
+              "$ref": "#/definitions/WorkingTime"
+            },
+            "required": true,
+            "name": "working_time",
+            "in": "body",
+            "description": "Working Time attributes"
+          }
+        ],
+        "operationId": "TimemanagerWeb.WorkingTimeController.update",
+        "description": "Update an existing working time entry"
+      },
+      "get": {
+        "tags": [
+          "WorkingTime"
+        ],
+        "summary": "Get working time",
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/WorkingTime"
+            },
+            "description": "Success"
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "Working Time ID"
+          }
+        ],
+        "operationId": "TimemanagerWeb.WorkingTimeController.show",
+        "description": "Get a single working time entry by ID"
+      },
+      "delete": {
+        "tags": [
+          "WorkingTime"
+        ],
+        "summary": "Delete working time",
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "Working Time ID"
+          }
+        ],
+        "operationId": "TimemanagerWeb.WorkingTimeController.delete",
+        "description": "Delete a working time entry"
+      }
+    },
+    "/api/working_times": {
+      "post": {
+        "tags": [
+          "WorkingTime"
+        ],
+        "summary": "Create working time",
+        "responses": {
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/WorkingTime"
+            },
+            "description": "Created"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/WorkingTime"
+            },
+            "required": true,
+            "name": "working_time",
+            "in": "body",
+            "description": "Working Time attributes"
+          }
+        ],
+        "operationId": "TimemanagerWeb.WorkingTimeController.create",
+        "description": "Create a new working time entry"
+      },
+      "get": {
+        "tags": [
+          "WorkingTime"
+        ],
+        "summary": "List working times",
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WorkingTime"
+              }
+            },
+            "description": "Success"
+          }
+        },
+        "parameters": [],
+        "operationId": "TimemanagerWeb.WorkingTimeController.index",
+        "description": "List all working time entries"
+      }
+    },
+    "/api/users/{id}": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update user",
+        "responses": {
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "description": "Success"
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "User ID"
+          },
+          {
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "required": true,
+            "name": "user",
+            "in": "body",
+            "description": "User attributes"
+          }
+        ],
+        "operationId": "TimemanagerWeb.UserController.update",
+        "description": "Update an existing user"
+      },
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get user",
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "description": "Success"
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "User ID"
+          }
+        ],
+        "operationId": "TimemanagerWeb.UserController.show",
+        "description": "Get a single user by ID"
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Delete user",
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "User ID"
+          }
+        ],
+        "operationId": "TimemanagerWeb.UserController.delete",
+        "description": "Delete a user"
+      }
+    },
+    "/api/users": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Create user",
+        "responses": {
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "description": "Created"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "required": true,
+            "name": "user",
+            "in": "body",
+            "description": "User attributes"
+          }
+        ],
+        "operationId": "TimemanagerWeb.UserController.create",
+        "description": "Create a new user"
+      },
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "List users",
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            },
+            "description": "Success"
+          }
+        },
+        "parameters": [],
+        "operationId": "TimemanagerWeb.UserController.index",
+        "description": "List all users"
+      }
+    },
+    "/api/tasks/{id}": {
+      "put": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Update task",
+        "responses": {
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Task"
+            },
+            "description": "Success"
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "Task ID"
+          },
+          {
+            "schema": {
+              "$ref": "#/definitions/Task"
+            },
+            "required": true,
+            "name": "task",
+            "in": "body",
+            "description": "Task attributes"
+          }
+        ],
+        "operationId": "TimemanagerWeb.TaskController.update",
+        "description": "Update an existing task"
+      },
+      "get": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Get task",
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Task"
+            },
+            "description": "Success"
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "Task ID"
+          }
+        ],
+        "operationId": "TimemanagerWeb.TaskController.show",
+        "description": "Get a single task by ID"
+      },
+      "delete": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Delete task",
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "Task ID"
+          }
+        ],
+        "operationId": "TimemanagerWeb.TaskController.delete",
+        "description": "Delete a task"
+      }
+    },
+    "/api/tasks": {
+      "post": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Create task",
+        "responses": {
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Task"
+            },
+            "description": "Created"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/Task"
+            },
+            "required": true,
+            "name": "task",
+            "in": "body",
+            "description": "Task attributes"
+          }
+        ],
+        "operationId": "TimemanagerWeb.TaskController.create",
+        "description": "Create a new task"
+      },
+      "get": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "List tasks",
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Task"
+              }
+            },
+            "description": "Success"
+          }
+        },
+        "parameters": [],
+        "operationId": "TimemanagerWeb.TaskController.index",
+        "description": "List all tasks"
+      }
+    },
+    "/api/clocks/{id}": {
+      "put": {
+        "tags": [
+          "Clock"
+        ],
+        "summary": "Update clock",
+        "responses": {
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ClockResponse"
+            },
+            "description": "Success"
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "Clock ID"
+          },
+          {
+            "schema": {
+              "$ref": "#/definitions/ClockRequest"
+            },
+            "required": true,
+            "name": "clock",
+            "in": "body",
+            "description": "Clock attributes"
+          }
+        ],
+        "operationId": "TimemanagerWeb.ClockController.update",
+        "description": "Update an existing clock entry"
+      },
+      "get": {
+        "tags": [
+          "Clock"
+        ],
+        "summary": "Get clock",
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ClockResponse"
+            },
+            "description": "Success"
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "Clock ID"
+          }
+        ],
+        "operationId": "TimemanagerWeb.ClockController.show",
+        "description": "Get a single clock entry by ID"
+      },
+      "delete": {
+        "tags": [
+          "Clock"
+        ],
+        "summary": "Delete clock",
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "Clock ID"
+          }
+        ],
+        "operationId": "TimemanagerWeb.ClockController.delete",
+        "description": "Delete a clock entry"
+      }
+    },
+    "/api/clocks": {
+      "post": {
+        "tags": [
+          "Clock"
+        ],
+        "summary": "Create clock",
+        "responses": {
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/ClockResponse"
+            },
+            "description": "Created"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/ClockRequest"
+            },
+            "required": true,
+            "name": "clock",
+            "in": "body",
+            "description": "Clock attributes"
+          }
+        ],
+        "operationId": "TimemanagerWeb.ClockController.create",
+        "description": "Create a new clock entry"
+      },
+      "get": {
+        "tags": [
+          "Clock"
+        ],
+        "summary": "List clocks",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ClocksResponse"
+            },
+            "description": "Success"
+          }
+        },
+        "parameters": [],
+        "operationId": "TimemanagerWeb.ClockController.index",
+        "description": "Get a list of all clock entries"
+      }
+    }
+  },
+  "definitions": {
+    "ClocksResponse": {
+      "type": "object",
+      "title": "Clocks Response",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Clock"
+          }
+        }
+      },
+      "description": "Response schema for multiple clocks"
+    },
+    "ClockResponse": {
+      "type": "object",
+      "title": "Clock Response",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/Clock"
+        }
+      },
+      "description": "Response schema for single clock operations"
+    },
+    "ClockRequest": {
+      "type": "object",
+      "title": "Clock Request",
+      "properties": {
+        "clock": {
+          "$ref": "#/definitions/Clock"
+        }
+      },
+      "description": "Request schema for creating or updating a clock"
+    },
+    "Clock": {
+      "type": "object",
+      "title": "Clock",
+      "required": [
+        "time",
+        "status",
+        "user_id"
+      ],
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "description": "ID of the associated user"
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Clock time"
+        },
+        "status": {
+          "type": "boolean",
+          "description": "Clock status (true for clock in, false for clock out)"
+        },
+        "id": {
+          "type": "integer",
+          "description": "Unique identifier"
+        }
+      },
+      "example": {
+        "user_id": 42,
+        "time": "2023-11-15T08:00:00Z",
+        "status": true,
+        "id": 1
+      },
+      "description": "A clock entry for a user"
+    },
+    "WorkingTime": {
+      "type": "object",
+      "title": "WorkingTime",
+      "required": [
+        "start",
+        "end",
+        "user_id"
+      ],
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "description": "User ID associated with this working time"
+        },
+        "start": {
+          "type": "string",
+          "format": "datetime",
+          "description": "Start time"
+        },
+        "id": {
+          "type": "integer",
+          "description": "Working Time ID"
+        },
+        "end_time": {
+          "type": "string",
+          "format": "datetime",
+          "description": "End time"
+        }
+      },
+      "description": "A working time entry for a user"
+    },
+    "User": {
+      "type": "object",
+      "title": "User",
+      "required": [
+        "username",
+        "email"
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username"
+        },
+        "id": {
+          "type": "integer",
+          "description": "User ID"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Email address"
+        }
+      },
+      "description": "A user of the application"
+    },
+    "Task": {
+      "type": "object",
+      "title": "Task",
+      "required": [
+        "title",
+        "user_id"
+      ],
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "description": "User ID associated with this task"
+        },
+        "title": {
+          "type": "string",
+          "description": "Task title"
+        },
+        "id": {
+          "type": "integer",
+          "description": "Task ID"
+        },
+        "due_date": {
+          "type": "string",
+          "format": "datetime",
+          "description": "Task due date"
+        },
+        "description": {
+          "type": "string",
+          "description": "Task description"
+        }
+      },
+      "description": "A task for a user"
+    }
+  },
+  "host": "localhost:4000",
+  "info": {
+    "title": "Timemanager API",
+    "version": "1.0"
+  }
+}

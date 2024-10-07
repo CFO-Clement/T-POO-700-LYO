@@ -1,0 +1,37 @@
+meta {
+  name: Delete Task
+  type: http
+  seq: 2
+}
+
+delete {
+  url: {{baseUrl}}/api/tasks/:taskId
+  body: none
+  auth: none
+}
+
+params:path {
+  taskId: {{taskId}}
+}
+
+vars:pre-request {
+  taskId: 2
+}
+
+assert {
+  res.status: eq 204
+}
+
+docs {
+  Cette requête supprime une tâche spécifique.
+  
+  Paramètres de l'URL :
+  - taskId : L'ID de la tâche à supprimer
+  
+  Réponse attendue :
+  - Aucun contenu
+  
+  Codes de statut :
+  - 204 : Suppression réussie
+  - 404 : Tâche non trouvée
+}

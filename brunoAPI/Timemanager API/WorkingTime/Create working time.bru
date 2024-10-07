@@ -1,0 +1,56 @@
+meta {
+  name: Create Working Time
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/working_times
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "working_time": {
+      "start": "{{startTime}}",
+      "end": "{{endTime}}",
+      "user_id": {{userId}}
+    }
+  }
+}
+
+vars:pre-request {
+  startTime: 2024-10-07T09:00:00+0000
+  endTime: 2024-10-07T17:00:00+0000
+  userId: 1
+}
+
+assert {
+  res.status: eq 201
+  res.body.data.id: isNumber
+  res.body.data.start: isString
+  res.body.data.end: isString
+  res.body.data.start: matches /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+  res.body.data.end: matches /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+}
+
+docs {
+  Cette requête crée une nouvelle entrée de temps de travail.
+  
+  Paramètres du corps :
+  - start : L'heure de début du travail (format ISO 8601)
+  - end : L'heure de fin du travail (format ISO 8601)
+  - user_id : L'ID de l'utilisateur associé à cette entrée de temps de travail
+  
+  Réponse attendue :
+  - Un objet JSON contenant les détails de l'entrée de temps de travail créée
+  
+  Codes de statut :
+  - 201 : Création réussie
+  - 422 : Erreur de validation des données
+}

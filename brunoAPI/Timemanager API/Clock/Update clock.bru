@@ -1,0 +1,63 @@
+meta {
+  name: Update clock
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{baseUrl}}/api/clocks/:clockId
+  body: json
+  auth: none
+}
+
+params:path {
+  clockId: {{clockId}}
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "clock": {
+      "time": "{{timestampNow}}",
+      "status": false,
+      "user_id": {{userId}}
+    }
+  }
+}
+
+vars:pre-request {
+  clockId: 1
+  timestampNow: 2024-10-07T19:07:10+0000
+  userId: 1
+}
+
+assert {
+  res.status: eq 200
+  res.body.data.id: eq {{clockId}}
+  res.body.data.time: isString
+  res.body.data.status: eq false
+  res.body.data.time: matches /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/
+}
+
+docs {
+  Cette requête met à jour une entrée d'horloge existante.
+  
+  Paramètres de l'URL :
+  - clockId : L'ID de l'entrée d'horloge à mettre à jour
+  
+  Paramètres du corps :
+  - time : L'heure de l'enregistrement (format ISO 8601)
+  - status : true pour le début du travail, false pour la fin
+  - user_id : L'ID de l'utilisateur associé à cette entrée d'horloge
+  
+  Réponse attendue :
+  - Un objet JSON contenant les détails mis à jour de l'entrée d'horloge
+  
+  Codes de statut :
+  - 200 : Mise à jour réussie
+  - 404 : Entrée d'horloge non trouvée
+  - 422 : Erreur de validation des données
+}

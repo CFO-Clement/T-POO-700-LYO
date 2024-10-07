@@ -1,0 +1,40 @@
+meta {
+  name: Get User
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/users/:userId
+  body: none
+  auth: none
+}
+
+params:path {
+  userId: {{userId}}
+}
+
+vars:pre-request {
+  userId: 4
+}
+
+assert {
+  res.status: eq 200
+  res.body.data.id: isNumber
+  res.body.data.username: isString
+  res.body.data.email: isString
+}
+
+docs {
+  Cette requête récupère les détails d'un utilisateur spécifique.
+  
+  Paramètres de l'URL :
+  - userId : L'ID de l'utilisateur à récupérer
+  
+  Réponse attendue :
+  - Un objet JSON contenant les détails de l'utilisateur
+  
+  Codes de statut :
+  - 200 : Requête réussie
+  - 404 : Utilisateur non trouvé
+}

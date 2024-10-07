@@ -1,0 +1,29 @@
+meta {
+  name: List Users
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/api/users
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body.data: isArray
+  res.body.data[0].id: isNumber
+  res.body.data[0].username: isString
+  res.body.data[0].email: isString
+}
+
+docs {
+  Cette requête récupère la liste de tous les utilisateurs.
+  
+  Réponse attendue :
+  - Un tableau d'objets JSON contenant les détails de tous les utilisateurs
+  
+  Codes de statut :
+  - 200 : Requête réussie
+}

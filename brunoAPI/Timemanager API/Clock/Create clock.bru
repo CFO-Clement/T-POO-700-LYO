@@ -1,0 +1,57 @@
+meta {
+  name: Create clock
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/api/clocks
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "clock": {
+      "time": "{{timestampNow}}",
+      "status": true,
+      "user_id": {{userId}}
+    }
+  }
+}
+
+vars:pre-request {
+  timestampNow: 2024-10-07T18:07:10+0000
+}
+
+vars:post-response {
+  : 
+}
+
+assert {
+  res.status: eq 201
+  res.body.data.id: isNumber 
+  res.body.data.time: isString {{
+  res.body.data.status: eq true
+  res.body.data.time: matches /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/
+}
+
+docs {
+  Cette requête crée une nouvelle entrée d'horloge pour un utilisateur.
+  
+  Paramètres du corps :
+  - time : L'heure de l'enregistrement (format ISO 8601)
+  - status : true pour le début du travail, false pour la fin
+  - user_id : L'ID de l'utilisateur associé à cette entrée d'horloge
+  
+  Réponse attendue :
+  - Un objet JSON contenant les détails de l'entrée d'horloge créée
+  
+  Codes de statut :
+  - 201 : Création réussie
+  - 422 : Erreur de validation des données
+}

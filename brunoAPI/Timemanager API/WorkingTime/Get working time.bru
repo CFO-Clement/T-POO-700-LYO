@@ -1,0 +1,42 @@
+meta {
+  name: Get Working Time
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/working_times/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: {{workingTimeId}}
+}
+
+vars:pre-request {
+  workingTimeId: 2
+}
+
+assert {
+  res.status: eq 200
+  res.body.data.id: eq {{workingTimeId}}
+  res.body.data.start: isString
+  res.body.data.end: isString
+  res.body.data.start: matches /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+  res.body.data.end: matches /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+}
+
+docs {
+  Cette requête récupère les détails d'une entrée de temps de travail spécifique.
+  
+  Paramètres de l'URL :
+  - id : L'ID de l'entrée de temps de travail à récupérer
+  
+  Réponse attendue :
+  - Un objet JSON contenant les détails de l'entrée de temps de travail
+  
+  Codes de statut :
+  - 200 : Requête réussie
+  - 404 : Entrée de temps de travail non trouvée
+}

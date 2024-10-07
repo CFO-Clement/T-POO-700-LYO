@@ -1,0 +1,50 @@
+meta {
+  name: Create User
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/users
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "user": {
+      "first_name": "first_name",
+      "last_name": "last_name",
+      "username": "newuser",
+      "email": "newuser@example.com"
+    }
+  }
+}
+
+assert {
+  res.status: eq 201
+  res.body.data.id: isNumber
+  res.body.data.username: eq "newuser"
+  res.body.data.email: eq "newuser@example.com"
+  res.body.data.first_name: isString 
+  res.body.data.last_name: isString 
+}
+
+docs {
+  Cette requête crée un nouvel utilisateur.
+  
+  Paramètres du corps :
+  - username : Le nom d'utilisateur
+  - email : L'adresse email de l'utilisateur
+  
+  Réponse attendue :
+  - Un objet JSON contenant les détails de l'utilisateur créé
+  
+  Codes de statut :
+  - 201 : Création réussie
+  - 422 : Erreur de validation des données
+}
