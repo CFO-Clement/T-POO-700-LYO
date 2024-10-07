@@ -29,3 +29,19 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 4- Run the following command to start the server:
 ```mix phx.server```
 5- Enjoy the app!
+
+## Dbeaver
+You can use dbeaver to connect to database with the following information:
+1- install dbeaver (https://dbeaver.io/download/ | sudo apt instalk dbveaver-ce)
+2- open dbeaver
+3- create a new connection
+4- select PostgreSQL
+5- in the connection settings, use the following information:
+  - Host: localhost
+  - Port: 5432
+  - Database: time_manager_dev
+  - User: postgres
+  - Password: postgres
+6- click on finish
+7- enjoy the database!
+```
